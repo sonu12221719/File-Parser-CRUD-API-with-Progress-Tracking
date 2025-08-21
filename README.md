@@ -91,6 +91,8 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
                 "email": "sonukumar200219@gmail.com"
         }
         }
+   - **Screenshot:**
+   ![App Screenshot](Photo/Register_New_User.png)
 
 - 1.2 User Login
 
@@ -111,6 +113,8 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
                 "email": "sonukumar200219@gmail.com"
         }
         }
+   - **Screenshot:**
+   ![App Screenshot](Photo/Login_User.png)
 
 
 **2. File Upload and Processing**
@@ -132,6 +136,9 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
                 "file_id": "a45c991c-49bf-4789-bfb1-abf5942aaccf"
         }
 
+  - **Screenshot:**
+  ![App Screenshot](Photo/file_upload.png)
+
 - 2.2 Get File Progress
    - **GET** /api/files/:id/progress
 
@@ -150,13 +157,15 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
                 "progress": 100
         }
 
+   - **Screenshots**
+   ![App Screenshot](Photo/uploading-1.png)
+   ![App Screenshot](Photo/uploading-2.png)
+   ![App Screenshot](Photo/uploading-complete.png)
+
 - 2.3 **Stream File Progress**
    - **GET** /api/files/:id/stream
    - Stream progress updates in real-time using Server-Sent Events (SSE).
 
-        ```
-        
-        ```
 
 - 2.5 **Get File Content**
    - **GET** /api/files/:id
@@ -165,6 +174,8 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
         {
                 "message": "File upload or processing in progress. Please try again later."
         }
+   - **Screenshot:**
+   ![App Screenshot](Photo/file_upload_process_check.png)
 
    - When file is already uploaded then we get data in console
         
@@ -181,3 +192,90 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
         10: 00007FF624AF1C7B v8::internal::Version::GetString+434555
         ...
         ```
+
+- 2.6 **List All Files**
+   - **GET** /api/files/
+   - **Response:**
+        
+        ```
+        [
+        {
+                "_id": "8c64854c-832b-472a-83f1-e014701e8aa9",
+                "status": "processing",
+                "uploadProgress": 100,
+                "processProgress": 20,
+                "created_at": "2025-08-21T07:32:29.954Z",
+                "updated_at": "2025-08-21T07:33:20.161Z",
+                "__v": 0,
+                "size": 209088000,
+                "filename": "test.csv",
+                "mimetype": "text/csv",
+                "storedPath": "D:\\project\\Nitro\\File-Parser-CRUD-API-with-Progress-Tracking\\uploads\\8c64854c-832b-472a-83f1-e014701e8aa9__test.csv"
+        },
+        {
+                "_id": "a45c991c-49bf-4789-bfb1-abf5942aaccf",
+                "status": "ready",
+                "uploadProgress": 100,
+                "processProgress": 100,
+                "created_at": "2025-08-21T07:13:58.178Z",
+                "updated_at": "2025-08-21T07:16:32.295Z",
+                "__v": 0,
+                "size": 209088000,
+                "filename": "test.csv",
+                "mimetype": "text/csv",
+                "storedPath": "D:\\project\\Nitro\\File-Parser-CRUD-API-with-Progress-Tracking\\uploads\\a45c991c-49bf-4789-bfb1-abf5942aaccf__test.csv"
+        },
+        {
+                "_id": "6362f67a-7f94-4250-bf5c-c06eb4fc374f",
+                "status": "ready",
+                "uploadProgress": 100,
+                "processProgress": 100,
+                "created_at": "2025-08-20T20:42:16.409Z",
+                "updated_at": "2025-08-20T20:44:12.772Z",
+                "__v": 0,
+                "size": 209088000,
+                "filename": "test.csv",
+                "mimetype": "text/csv",
+                "storedPath": "D:\\project\\Nitro\\File-Parser-CRUD-API-with-Progress-Tracking\\uploads\\6362f67a-7f94-4250-bf5c-c06eb4fc374f__test.csv"
+        },
+        {
+                "_id": "d101f5f8-8b06-4f30-8493-2360ab1b17df",
+                "status": "ready",
+                "uploadProgress": 100,
+                "processProgress": 100,
+                "created_at": "2025-08-20T18:40:07.017Z",
+                "updated_at": "2025-08-20T18:40:07.058Z",
+                "__v": 0,
+                "size": 1210,
+                "filename": "test.csv",
+                "mimetype": "text/csv",
+                "storedPath": "D:\\project\\Nitro\\File-Parser-CRUD-API-with-Progress-Tracking\\src\\uploads\\d101f5f8-8b06-4f30-8493-2360ab1b17df__test.csv"
+        },
+        {
+                "_id": "04dbb184-ab79-40b5-a8c5-a1a11078d514",
+                "status": "ready",
+                "uploadProgress": 100,
+                "processProgress": 100,
+                "created_at": "2025-08-20T18:39:10.286Z",
+                "updated_at": "2025-08-20T18:39:10.482Z",
+                "__v": 0,
+                "size": 1210,
+                "filename": "test.csv",
+                "mimetype": "text/csv",
+                "storedPath": "D:\\project\\Nitro\\File-Parser-CRUD-API-with-Progress-Tracking\\src\\uploads\\04dbb184-ab79-40b5-a8c5-a1a11078d514__test.csv"
+        }
+        ]
+        ```
+   
+   
+
+- 2.7 **Delete File**
+   - **DELETE** /api/files/:id
+   - **Header**
+        ```
+        Authorization: Bearer <token>
+        ```
+   - **Screenshots:**
+   ![App Screenshot](Photo/Delete_file_from_database.png)
+
+---------------------------------------------------------------------------------------------------
