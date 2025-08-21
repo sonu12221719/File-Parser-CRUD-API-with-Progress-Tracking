@@ -71,3 +71,113 @@ Step 6. Run Command ```npm run dev``` Or ```npm start```
 
 ## 2. API documentation
 
+**1. Authentication**
+
+- 1.1 User Registration
+
+  - **POST** /api/auth/register
+  - **Request Body**
+
+        {
+                "email": "sonukumar200219@gmail.com",
+                "password": "12345"
+        }
+  - **Response Body**
+  
+        {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiI2OGE2YzMzNmY0YWNmYWJiNzJjZGJhZmQiLCJlbWFpbCI6InNvbnVAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTU3NTk0MTQsImV4cCI6MTc1NTg0NTgxNH0.Cuw9LyQY4oJPkBOiNTE5-VtP1jdef3V7k0U5l5wqVuw",
+        "user": {
+                "id": "68a6c336f4acfabb72cdbafd",
+                "email": "sonukumar200219@gmail.com"
+        }
+        }
+
+- 1.2 User Login
+
+  - **POST** /api/auth/login
+  - **Request Body**
+
+        {
+                "email":"sonukumar200219@gmail.com",
+                "password":"12345"
+        }
+
+  - **Response Body**
+
+        {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiI2OGE2YzMzNmY0YWNmYWJiNzJjZGJhZmQiLCJlbWFpbCI6InNvbnVAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTU3NTk0MTQsImV4cCI6MTc1NTg0NTgxNH0.Cuw9LyQY4oJPkBOiNTE5-VtP1jdef3V7k0U5l5wqVuw",
+        "user": {
+                "id": "68a6c336f4acfabb72cdbafd",
+                "email": "sonukumar200219@gmail.com"
+        }
+        }
+
+
+**2. File Upload and Processing**
+
+- 2.1 Upload file
+  - **POST** api/files
+  - **Headers:**
+
+        Authorization: Bearer <token>
+        Content-Type: multipart/form-data
+
+  - **Form Data:**
+
+        Upload type is file: upload a CSV file of large size to see progress (~200MB)
+
+  - **Response:**
+
+        {
+                "file_id": "a45c991c-49bf-4789-bfb1-abf5942aaccf"
+        }
+
+- 2.2 Get File Progress
+   - **GET** /api/files/:id/progress
+
+        ```
+        while uploading
+        {
+                "file_id": "6362f67a-7f94-4250-bf5c-c06eb4fc374f",
+                "status": "uploading",
+                "progress": 76
+        }
+        ----------------------------------------------------------
+        when uploading is completed
+        {
+                "file_id": "6362f67a-7f94-4250-bf5c-c06eb4fc374f",
+                "status": "ready",
+                "progress": 100
+        }
+
+- 2.3 **Stream File Progress**
+   - **GET** /api/files/:id/stream
+   - Stream progress updates in real-time using Server-Sent Events (SSE).
+
+        ```
+        
+        ```
+
+- 2.5 **Get File Content**
+   - **GET** /api/files/:id
+   - When file uploading is in progress
+        
+        {
+                "message": "File upload or processing in progress. Please try again later."
+        }
+
+   - When file is already uploaded then we get data in console
+        
+        ```
+        1: 00007FF6244E097D node::SetCppgcReference+17261
+        2: 00007FF624448E08 v8::base::CPU::num_virtual_address_bits+92312
+        3: 00007FF624FC8B21 v8::Isolate::ReportExternalAllocationLimitReached+65
+        4: 00007FF624FB5A06 v8::Function::Experimental_IsNopFunction+2790
+        5: 00007FF624E05110 v8::internal::StrongRootAllocatorBase::StrongRootAllocatorBase+31392
+        6: 00007FF624E021AA v8::internal::StrongRootAllocatorBase::StrongRootAllocatorBase+19258
+        7: 00007FF624E17A41 v8::Isolate::GetHeapProfiler+7825
+        8: 00007FF624E182BA v8::Isolate::GetHeapProfiler+9994
+        9: 00007FF624E28D57 v8::Isolate::GetHeapProfiler+78247
+        10: 00007FF624AF1C7B v8::internal::Version::GetString+434555
+        ...
+        ```
