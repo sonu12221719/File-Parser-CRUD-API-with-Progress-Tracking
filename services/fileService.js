@@ -100,7 +100,7 @@ export async function getFileContent(id, query) {
   const doc = await FileModel.findById(id).lean();
   if (!doc) return { status: 404, body: { error: "Not found" } };
   if (doc.status !== "ready")
-    return { status: 202, body: { message: "Processing in progress" } };
+    return { status: 202, body: { message: "File upload or processing in progress. Please try again later." } };
 
   const page = Math.max(1, Number(query.page || 1));
   const limit = Math.min(1000, Math.max(1, Number(query.limit || 100)));
